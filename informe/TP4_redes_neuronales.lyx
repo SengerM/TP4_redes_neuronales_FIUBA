@@ -1,0 +1,1506 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+% Esta linea es un comentario
+%\date{}  % Sacamos la fecha del principio
+\hyphenation{dis-po-si-ti-vo re-gis-tro di-se-ña-do con-si-de-rar-se} %  Indicamos cómo separar las palabras. Cada palabra se separa con un espacio.
+% Configuracion de epigrafes ------------------
+%\usepackage[footnotesize]{caption}
+%\captionsetup{width=0.8\textwidth}
+%Modificaciones de leyendas en figuras
+\usepackage{caption}
+\captionsetup[figure]{margin=40pt,font=normalsize,labelfont=bf} 
+% ---------------------------------------------------------------
+\usepackage{lmodern} % Parece que mejora el aspecto de las fuentes vectoriales o algo asi
+\usepackage[T1]{fontenc} % Utiliza un cifrado de 8 bits para los caracteres permitiendo usar los acentuados sin problemas
+\usepackage{float}
+\usepackage{units}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+
+%\renewcommand{\arraystretch}{2.5} % Mejora el espaciamiento vertical de las matrices, para que las fracciones no queden tan pegadas
+
+%\usepackage{placeins} % Es para que los flotantes no se vallan a cualquier lado
+% Para usar "placeins" colocar codigo TeX en forma de \FloatBarrier y los flotantes no pasan de ahi
+\end_preamble
+\use_default_options true
+\begin_modules
+customHeadersFooters
+\end_modules
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 2
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "/home/alf/Dropbox/macros2015.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Left Header
+Facultad de Ingeniería de la Universidad de Buenos Aires
+\end_layout
+
+\begin_layout Right Header
+Matías H.
+ Senger (95589)
+\end_layout
+
+\begin_layout Title
+Redes Neuronales (8654)
+\begin_inset Newline newline
+\end_inset
+
+Uso del perceptrón multicapa para distorsionar 
+\begin_inset Newline newline
+\end_inset
+
+audio de guitarra eléctrica
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+Matías H.
+ Senger (95589, SengerEfectos@hotmail.com)
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 10mm
+\end_inset
+
+
+\size larger
+Facultad de Ingeniería de la Universidad de Buenos Aires
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 5mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "70col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+En el presente trabajo se desarrolló una serie de perceptrones multicapa
+ al los cuales se les enseñó a distorsionar audio de guitarra eléctrica
+ con el fin de obtener aplicaciones en el ámbito de la música moderna.
+ Los perceptrones reciben una señal de audio de una guitarra eléctrica y
+ en sus salidas se obtienen las señales distorsionadas en forma similar
+ a la que lo haría un circuito analógico de transistores.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+En géneros musicales modernos como el rock, la distorsión es un 
+\emph on
+efecto de sonido
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Un 
+\emph on
+efecto de sonido
+\emph default
+ es, desde un punto de vista matemático, una función que se aplica a la
+ señal de audio original con el fin de obtener una versión modificada de
+ la misma que tenga otras cualidades sonoras.
+ En el ámbito de la guitarra eléctrica es muy común la presencia de los
+ denominados 
+\emph on
+pedales de efectos
+\emph default
+ que son literalmente cajas metálicas con conectores de entrada y de salida
+ que poseen en su interior un circuito electrónico encargado de generar
+ algún efecto.
+ Los efectos más comunes en pedales de guitarra son distorsión, 
+\emph on
+overdrive
+\emph default
+, 
+\emph on
+chorus
+\emph default
+, 
+\emph on
+delay
+\emph default
+, 
+\emph on
+wah wah
+\emph default
+, etc.
+\end_layout
+
+\end_inset
+
+
+\emph default
+ muy común que se aplica por lo general a las guitarras eléctricas, aunque
+ también se suele aplicar a bajos y con menos frecuencia a teclados y otros
+ instrumentos.
+ El efecto de la distorsión consiste justamente en distorsionar la señal
+ de entrada con el fin de obtener una nueva composición armónica y darle
+ más riqueza al sonido del instrumento.
+ En la actualidad existen sistemas distorsionadores digitales y analógicos,
+ nosotros nos limitaremos a los analógicos (que son los originales) ya que
+ los digitales intentan, de alguna manera, emular a los analógicos.
+ 
+\end_layout
+
+\begin_layout Standard
+Los distorsionadores analógicos son amplificadores que, de alguna forma,
+ se salen de su régimen lineal.
+ Esto hace que la señal de salida gane determinados armónicos que no están
+ presentes en la señal de entrada y así le confieren un nuevo color al sonido.
+ Debido a que el amplificador trabaja en una región no lineal, la relación
+ entre la señal de entrada y la de salida también es no lineal.
+ Esta relación no lineal hace que muchas veces sea muy complicado obtener
+ la transferencia del sistema lo cual dificulta la imitación de un distorsionado
+r analógico mediante técnicas digitales.
+\end_layout
+
+\begin_layout Standard
+Dado que los perceptrones multicapa son capaces de implementar funciones
+ no lineales sin necesidad de conocer en forma explícita su formulación
+ matemática, si no observando cómo actúa sobre distintas muestras, esto
+ los convierte en buenos candidatos a la hora de recrear sistemas no lineales
+ como los distorsionadores de guitarra eléctrica.
+\end_layout
+
+\begin_layout Standard
+El objetivo fundamental de este trabajo es el de obtener perceptrones capaces
+ de aprender cómo distorsionar una señal de audio genérica de forma similar
+ a la que lo haría un circuito de distorsión analógico.
+ 
+\end_layout
+
+\begin_layout Section
+Desarrollo del trabajo
+\end_layout
+
+\begin_layout Standard
+Con el fin de llevar a cabo el proyecto, lo primero que se realizó fue codificar
+ un 
+\emph on
+script
+\emph default
+ de 
+\emph on
+Octave
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\size normal
+Octave es un software de código abierto similar a Matlab.
+\end_layout
+
+\end_inset
+
+ que permitiera implementar perceptrones con un número arbitrario de capas
+ y de neuronas por capa.
+ Para el entrenamiento de estos perceptrones se utilizó el algoritmo 
+\emph on
+back propagation
+\emph default
+ con la variante de agregar un parámetro de 
+\emph on
+momentum
+\emph default
+, tal como detalla 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "J. Hertz"
+
+\end_inset
+
+ en la página 123, con el fin de acelerar el entrenamiento del perceptrón.
+ Una vez implementado el algoritmo completo, se lo puso a prueba enseñándole
+ a perceptrones de diversas estructuras distintas funciones sencillas, que
+ nada tienen que ver con el audio de una guitarra eléctrica, únicamente
+ con el fin de verificar el correcto funcionamiento del algoritmo escrito.
+ Luego se procedió luego a implementar la aplicación de audio.
+\end_layout
+
+\begin_layout Subsection
+Arquitectura utilizada 
+\begin_inset CommandInset label
+LatexCommand label
+name "SUB. Arquintectura utilizada"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que el perceptrón se implementó en una computadora, el mismo debe procesar
+ señales grabadas digitalmente.
+ El formato utilizado para almacenar las muestras de entrenamiento fue el
+ formato WAV, con una frecuencia de muestreo de 
+\begin_inset Formula $42.1\KILO{Hz}$
+\end_inset
+
+ que corresponde al estándar utilizado en los discos compactos de música.
+ 
+\end_layout
+
+\begin_layout Standard
+Una forma posible de implementar el perceptrón hubiera sido utilizar 
+\begin_inset Formula $N$
+\end_inset
+
+ neuronas de entrada y 
+\begin_inset Formula $N$
+\end_inset
+
+ neuronas de salida, con 
+\begin_inset Formula $N$
+\end_inset
+
+ igual a la cantidad de muestras de la señal a procesar, y así obtener una
+ señal de igual longitud en las 
+\begin_inset Formula $N$
+\end_inset
+
+ neuronas de salida.
+ Este enfoque es poco práctico en términos computacionales debido a que
+ para procesar una señal de audio de un segundo, muestreada a 
+\begin_inset Formula $42.1\KILO{Hz}$
+\end_inset
+
+, se requerirían 
+\begin_inset Formula $42100$
+\end_inset
+
+ neuronas de entrada y otras tantas de salida, más las de las capas ocultas.
+ Esto es imposible de implementar en forma práctica en una computadora estándar
+ actual.
+ Por otro lado también limita la longitud de los audios a procesar a una
+ longitud fija determinada por la cantidad de neuronas de las capas de entrada
+ y salida del perceptrón.
+\end_layout
+
+\begin_layout Standard
+Para solventar estas dificultades, se optó por implementar un perceptrón
+ con un menor número de neuronas que realice el procesamiento de la señal
+ en forma progresiva avanzando desde el principio hasta el final del archivo
+ de audio.
+ De esta forma se obtiene una red de un tamaño mucho menor que en el otro
+ caso y la longitud de las señales a procesar es arbitraria, logrando además
+ una mayor flexibilidad.
+ 
+\end_layout
+
+\begin_layout Standard
+Se optó por trabajar en el dominio del tiempo y no en el de la frecuencia
+ ya que los distorsionadores de guitarra eléctrica son no lineales por lo
+ que se consideró, a priori, que no habría beneficio alguno al pasar al
+ dominio de la frecuencia.
+ Por otro lado se evitan efectos de ventaneo al pasar al dominio de la frecuenci
+a, los cuales podrían ser no despreciables si la cantidad de neuronas de
+ la capa de entrada es pequeña.
+\end_layout
+
+\begin_layout Standard
+En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. arquitectura procesamiento"
+
+\end_inset
+
+ se muestra la arquitectura utilizada.
+ El perceptrón posee un número arbitrario de neuronas de entrada las cuales
+ van recorriendo en forma progresiva la señal a procesar, avanzando de a
+ una muestra por vez, y una única neurona de salida en la cual se obtiene
+ la señal de salida.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename arquitectura_procesamiento.svg
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Arquitectura utilizada para procesar las señales de audio con el perceptrón
+ desarrollado.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. arquitectura procesamiento"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+No se consideraron más neuronas en la capa de salida ya que hubiera sido
+ más complicada la reconstrucción de la señal debido a la superposición
+ de las ventanas de la señal en las neuronas de salida.
+ En cambio, al utilizar una única neurona, cada muestra se genera en forma
+ individual y no es necesario ningún proceso de reconstrucción.
+\end_layout
+
+\begin_layout Standard
+Como se mencionó anteriormente, la estructura interna del perceptrón de
+ la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. arquitectura procesamiento"
+
+\end_inset
+
+ es completamente arbitraria en lo que respecta a la cantidad de capas y
+ la cantidad de neuronas por capa.
+ La nomenclatura utilizada para identificar a las estructuras en el presente
+ informe será colocar en forma de vector la cantidad de neuronas que tiene
+ cada capa del perceptrón, por ejemplo [4,2,3,1] identifica a un perceptrón
+ de cuatro capas, con cuatro neuronas en la capa de entrada, una neurona
+ en la capa de salida y dos y tres neuronas en las capas ocultas respectivamente
+, tal como se ilustra en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. dibujo de perceptron"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename perceptron.svg
+	height 4cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estructura de un perceptrón de ejemplo implementado mediante el algoritmo
+ desarrollado.
+ La estructura de este perceptrón se describe mediante el vector [4,2,3,1].
+ La capa inferior es la capa de entrada y la capa superior es la capa de
+ salida.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. dibujo de perceptron"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Entrenamiento del perceptrón
+\end_layout
+
+\begin_layout Standard
+Para entrenar al perceptrón se utilizó el algoritmo de 
+\emph on
+back propagation
+\emph default
+ tal cual lo detalla 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "J. Hertz"
+
+\end_inset
+
+ en la sección correspondiente, con el agregado del parámetro de 
+\emph on
+momentum
+\emph default
+ desarrollado en la misma obra.
+ En cada paso que se aplicó el algoritmo de 
+\emph on
+back propagation
+\emph default
+ se procedió de la siguiente forma:
+\end_layout
+
+\begin_layout Enumerate
+Se aplicó a las 
+\begin_inset Formula $N$
+\end_inset
+
+ neuronas de entrada las muestras 
+\begin_inset Formula $[k,k+N-1]$
+\end_inset
+
+ de la señal de entrada y se propagó el resultado hasta obtener la muestra
+ de salida 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Se aplicó el algoritmo 
+\emph on
+back propagation
+\emph default
+ con la consecuente corrección de pesos de interconexión entre neuronas.
+\end_layout
+
+\begin_layout Enumerate
+Se avanzó la ventana de entrada a las muestras 
+\begin_inset Formula $[k+1,k+N]$
+\end_inset
+
+ y se volvió al paso 1.
+\end_layout
+
+\begin_layout Standard
+Este procedimiento se repitió hasta haber recorrido por completo la señal
+ a procesar.
+\end_layout
+
+\begin_layout Subsubsection
+Obtención de las muestras de entrenamiento
+\end_layout
+
+\begin_layout Standard
+Dado que el objetivo del perceptrón es, en el presente trabajo, distorsionar
+ señales provenientes de una guitarra eléctrica, lo que se hizo fue grabar
+ con la computadora distintos 
+\emph on
+riffs
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+Riff
+\emph default
+ es un término empleado en el ámbito del rock que hace referencia a un fraseo
+ melódico tocado con una guitarra eléctrica.
+ Un ejemplo de un 
+\emph on
+riff
+\emph default
+ es la melodía con la que empieza la canción 
+\emph on
+Day Tripper
+\emph default
+ de 
+\emph on
+The Beatles
+\emph default
+.
+\end_layout
+
+\end_inset
+
+
+\emph default
+ utilizando una guitarra eléctrica sin distorsión.
+ Luego se conectó la salida de audio de la computadora a la entrada de un
+ pedal analógico de distorsión, en particular el modelo 
+\emph on
+Rat
+\emph default
+ de la compañía 
+\emph on
+ProCo,
+\emph default
+ y la salida del mismo a la entrada de audio de la computadora.
+ En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. obtencion de muestras"
+
+\end_inset
+
+ se muestra un esquema de este procedimiento.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename obtencion_de_muestras.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Esquema de obtención de las señales con y sin distorsión utilizadas para
+ entrenar al perceptrón.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. obtencion de muestras"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De esta forma se grabó una versión distorsionada de cada uno de los 
+\emph on
+riffs
+\emph default
+ grabados previamente, obteniéndose así dos audios para cada 
+\emph on
+riff
+\end_layout
+
+\begin_layout Itemize
+clean
+\begin_inset Formula $i$
+\end_inset
+
+.wav 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ versión limpia
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Sin distorsión.
+\end_layout
+
+\end_inset
+
+ del 
+\emph on
+riff
+\emph default
+ 
+\begin_inset Formula $i$
+\end_inset
+
+-ésimo grabado.
+\end_layout
+
+\begin_layout Itemize
+dist
+\begin_inset Formula $i$
+\end_inset
+
+.wav 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ versión distorsionada del 
+\emph on
+riff
+\emph default
+ 
+\begin_inset Formula $i$
+\end_inset
+
+-ésimo grabado.
+\end_layout
+
+\begin_layout Standard
+Estos archivos (cinco en total), cuya extensión temporal oscila entre 3
+ y 5 segundos, fueron utilizados como señal de entrada (clean
+\begin_inset Formula $i$
+\end_inset
+
+.wav) y señal de salida (dist
+\begin_inset Formula $i$
+\end_inset
+
+.wav) para entrenar al perceptrón.
+ En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. seniales utilizadas para entrenar"
+
+\end_inset
+
+ se muestra un ejemplo de estas señales.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Audios_utilizados_para_entrenar_el_perceptron.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ejemplo de un fragmento correspondiente a un archivo clean
+\begin_inset Formula $i$
+\end_inset
+
+.wav y dist
+\begin_inset Formula $i$
+\end_inset
+
+.wav utilizado para entrenar al perceptrón.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. seniales utilizadas para entrenar"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Adicionalmente se generó una serie de archivos de audio con señales senoidales
+ puras y se las distorsionó con el pedal de distorsión de la misma forma
+ que se explicó anteriormente.
+\end_layout
+
+\begin_layout Subsection
+Medición del error
+\end_layout
+
+\begin_layout Standard
+En el caso de señales de audio como las utilizadas en el presente trabajo,
+ resultan de escasa utilidad los estimadores de error tradicionales, como
+ el error cuadrático medio, ya que no se puede dar una relación certera
+ entre la calidad del audio obtenida y un determinado valor del error cuadrático
+ medio.
+ Puede ocurrir que, a pesar de que el perceptrón no produzca la misma distorsión
+ exacta que el sistema analógico original, el audio obtenido en la salida
+ sea de buenas cualidades sonoras, lo cual resulta muy complicado de medir
+ en forma matemática.
+ Es por ello que en el análisis de resultados no se utilizó un estimador
+ matemático, como es común, si no que se juzgaron los resultados de forma
+ visual mediante una superposición gráfica de las señales y se realizó una
+ comparación auditiva reproduciendo las señales de distorsión originales
+ y las producidas por los distintos perceptrones.
+ Esta comparación auditiva fue la más importante a la hora de juzgar los
+ resultados obtenidos.
+\end_layout
+
+\begin_layout Section
+Resultados obtenidos
+\end_layout
+
+\begin_layout Standard
+Debido a que no se conoce una forma analítica que permita determinar la
+ estructura óptima de un perceptrón (número de capas y neuronas por capas)
+ para la tarea a realizar, se procedió de forma empírica con una guía previa
+ en base a la experiencia del autor de 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sanchez Tube Screamer"
+
+\end_inset
+
+.
+ Se realizaron numerosas pruebas variando tanto la estructura del perceptrón
+ (capas y número de neuronas) como así también los parámetros de aprendizaje
+ del algoritmo 
+\emph on
+back propagation
+\emph default
+.
+\end_layout
+
+\begin_layout Subsection
+Resultados exitosos
+\end_layout
+
+\begin_layout Standard
+Redes de más capas demostraron ser mejores para la tarea de distorsionar
+ audios de guitarra eléctrica.
+ Los mejores resultados que se obtuvieron fueron con redes de estructuras
+ [32,16,8,8,1] y [32,16,8,4,2,1].
+ En estos casos el sonido obtenido se asemeja en gran medida al original
+ y además el ruido de fondo, aún presente, es amplificado en menor medida
+ que con las demás topologías de redes.
+ Por otro lado estas redes demostraron ser capaces de aprender a distorsionar
+ mucho más rápido que otras redes.
+\end_layout
+
+\begin_layout Paragraph*
+Perceptrón [32,16,8,8,1]
+\end_layout
+
+\begin_layout Standard
+Se obtuvieron resultados satisfactorios con una red de estructura [32,16,8,8,1],
+ tal como se muestra en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. resultados [32,16,8,8,1]"
+
+\end_inset
+
+.
+ En la misma se puede ver un fragmento de la señal con la distorsión original
+ y el mismo fragmento correspondiente a la distorsión generada por el perceptrón.
+ El perceptrón fue entrenado con los audios 1, 2 y 3 (cada audio en su extensión
+ completa) en dicho orden, con parámetros 
+\begin_inset Formula $\eta=0.01$
+\end_inset
+
+ y 
+\begin_inset Formula $\text{momentum}=0.01$
+\end_inset
+
+.
+ En la figura mencionada se encuentra un fragmento del audio número 1 luego
+ de que al perceptrón se le enseñasen los tres audios, lo cual demuestra
+ que el mismo ha sido capaz no solo de aprender el audio número 1 si no
+ también de 
+\begin_inset Quotes eld
+\end_inset
+
+recordarlo
+\begin_inset Quotes erd
+\end_inset
+
+ luego de que se le hayan enseñado los otros dos audios.
+ A pesar de que se observan diferencias (en la figura), ambas señales presentan
+ una gran similitud y, más importante aún, auditivamente son similares.
+ El error cuadrático medio cometido al procesar el audio de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. resultados [32,16,8,8,1]"
+
+\end_inset
+
+ (completo) fue de 
+\begin_inset Formula $721\PORDIEZALA{-6}$
+\end_inset
+
+.
+ La distorsión generada por este perceptrón tiene levemente más componentes
+ armónicas de alta frecuencia pero no deja de tener un sonido agradable
+ y con el mismo carácter que la distorsión original con lo cual su utilización
+ como efecto distorsionador sería perfectamente posible.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename 2016:02:02:16:35:58_dominio_del_tiempo.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Superposición de un pequeño fragmento de las señales con distorsión original
+ y distorsionada por un perceptrón de estructura [32,16,8,8,1].
+ El error cuadrático medio cometido al procesar este audio completo fue
+ de 
+\begin_inset Formula $721\PORDIEZALA{-6}$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. resultados [32,16,8,8,1]"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Una prueba que se realizó con este mismo perceptrón de estructura [32,16,8,8,1],
+ en el mismo estado de aprendizaje
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Es decir que no se le enseñó ningún otro audio nuevo.
+\end_layout
+
+\end_inset
+
+ que al momento de procesar la señal de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. resultados [32,16,8,8,1]"
+
+\end_inset
+
+, fue la de procesar el archivo de audio número 5 el cual 
+\emph on
+jamás había sido presentado anteriormente al perceptrón
+\emph default
+.
+ El resultado obtenido nuevamente fue satisfactorio ya que el audio resultante
+ es prácticamente idéntico al original producido por la distorsión analógica,
+ con un error cuadrático medio de 
+\begin_inset Formula $682\PORDIEZALA{-6}$
+\end_inset
+
+.
+ En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. resultados [32 16 8 8 1] audio jamas escuchado"
+
+\end_inset
+
+ se puede ver un fragmento de este resultado.
+ Nuevamente se observan algunas diferencias gráficas, sin embargo a nivel
+ auditivo se puede considerar que el sonido original y el generado por el
+ perceptrón son prácticamente idénticos.
+ Esta prueba demuestra que
+\emph on
+ el perceptrón fue capaz de distorsionar un audio completamente desconocido
+ y hacerlo de la misma forma en que lo hizo la distorsión analógica
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename 2016:02:02:18:41:58_dominio_del_tiempo.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Resultado obtenido al procesar el audio número 5 mediante el perceptrón
+ de estructura [32,16,8,8,1] cuando solo se le habían enseñado los audios
+ 1, 2 y 3 (es decir, 
+\emph on
+el audio 5 jamás había sido presentado anteriormente
+\emph default
+).
+ Se observa que, a pesar de que el audio es completamente nuevo para el
+ perceptrón, ambas señales poseen una alta correlación, 
+\emph on
+lo cual indica que el mismo ha aprendido a distorsionar audios que nunca
+ se le presentaron anteriormente de una forma similar a la que lo haría
+ la distorsión analógica original
+\emph default
+.
+ El error cuadrático medio cometido a lo largo de todo este audio fue de
+ 
+\begin_inset Formula $682\PORDIEZALA{-6}$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. resultados [32 16 8 8 1] audio jamas escuchado"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Perceptrón [32,16,8,4,2,1]
+\end_layout
+
+\begin_layout Standard
+El perceptrón de estructura [32,16,8,4,2,1] demostró ser el de mejores cualidade
+s entre los ensayados.
+ El mismo aprendió a distorsionar únicamente mediante la enseñanza de dos
+ audios, más rápido que todos los demás ensayados.
+ Además presentó la mejor relación señal-ruido y la mejor fidelidad a la
+ distorsión original.
+ En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. audio 1 perceptron [32 16 8 4 2 1]"
+
+\end_inset
+
+ se muestra un fragmento de una señal generada por este perceptrón.
+ Como puede verse la misma posee una alta similitud con la original.
+ En este caso el error cuadrático medio obtenido fue de 
+\begin_inset Formula $948\PORDIEZALA{-6}$
+\end_inset
+
+ que si bien es mayor que en el caso del perceptrón de estructura [32,16,8,8,1]
+ presentado anteriormente, como se dijo anteriormente no refleja en forma
+ exacta la calidad del audio obtenido.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename 2016:02:03:19:59:37_dominio_del_tiempo.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fragmento de un audio (audio 1) procesado por el perceptrón de estructura
+ [32,16,8,4,2,1].
+ Al momento de generar esta señal el perceptrón fue entrenado con los audios
+ 1 y 2.
+ El error cuadrático medio cometido en este caso fue de 
+\begin_inset Formula $948\PORDIEZALA{-6}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. audio 1 perceptron [32 16 8 4 2 1]"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Resultados no exitosos
+\end_layout
+
+\begin_layout Standard
+Las estructuras de tres capas, e.g.
+ [20,10,1], demostraron no ser capaces de dar resultados satisfactorios.
+ Se probaron diversas estructuras de tres capas como por ejemplo [10,20,1],
+ [32,16,1], [64,64,1], etc.
+ En todos los casos los fraseos melódicos de la guitarra fueron perfectamente
+ reconocibles, pero las cualidades del sonido obtenido estaban muy lejos
+ de la distorsión original y además la relación señal-ruido se empobreció
+ considerablemente.
+ Los errores cuadráticos medios obtenidos fueron de 
+\begin_inset Formula $9.81\PORDIEZALA{-3}$
+\end_inset
+
+ para la red [10,20,1], 
+\begin_inset Formula $2.73\PORDIEZALA{-3}$
+\end_inset
+
+ para la red [32,16,1] y 
+\begin_inset Formula $28.8\PORDIEZALA{-3}$
+\end_inset
+
+ para la red [64,64,1], todas habiendo procesado el audio número 1.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Perceptrón [5,5,5,1]
+\end_layout
+
+\begin_layout Standard
+En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. resultados [5,5,5,1]"
+
+\end_inset
+
+ se muestran superpuestas la señal de distorsión original en rojo y la señal
+ obtenida con un perceptrón de estructura [5,5,5,1] en verde.
+ Al momento de generar dicha señal de distorsión la red había sido entrenada
+ con los audios 1, 2 y 3 en su totalidad en dicho orden.
+ El audio procesado al cual corresponden las señales de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. resultados [5,5,5,1]"
+
+\end_inset
+
+ es el número 1.
+ Si bien la distorsión obtenida puede llegar a tener aplicaciones musicales,
+ en este caso el resultado no se lo consideró satisfactorio ya que la la
+ misma no es similar a la original.
+ Esta diferencia se puede apreciar tanto en el gráfico de la figura citada
+ como también en forma auditiva.
+ La distorsión obtenida a partir del perceptrón posee más componentes de
+ alta frecuencia que la distorsión original y su sonoridad es considerablemente
+ distinta.
+ El error cuadrático medio obtenido en este caso fue de 
+\begin_inset Formula $6.31\PORDIEZALA{-3}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename 2016:01:28:14:40:55_dominio_del_tiempo.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Superposición de un pequeño fragmento de las señales con distorsión original
+ y distorsionada por un perceptrón de estructura [5,5,5,1].
+ El error cuadrático medio obtenido al procesar este audio fue de 
+\begin_inset Formula $6.31\PORDIEZALA{-3}$
+\end_inset
+
+.
+  
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. resultados [5,5,5,1]"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Ruido de fondo
+\end_layout
+
+\begin_layout Standard
+Como efecto adverso se puede mencionar que los audios procesados por todos
+ los perceptrones ensayados poseen un mayor nivel de ruido de fondo que
+ los audios originales.
+ Según el perceptrón y el estado de aprendizaje del mismo este ruido varía
+ en intensidad y en ancho de banda.
+ En el caso del audio obtenido con el perceptrón de estructura [32,16,8,8,1]
+ es este ruido de fondo el único parámetro que permite diferenciar (auditivament
+e) el audio original y el obtenido mediante el perceptrón.
+ En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. FFT [32 16 8 8 1]"
+
+\end_inset
+
+ se muestra un análisis en el dominio de la frecuencia del audio obtenido
+ con el perceptrón de estructura [32,16,8,8,1].
+ En la misma se observa el mayor nivel de ruido de fondo para el perceptrón,
+ presente en la banda de 5000 a 15000 Hz.
+ También se ha graficado una FFT del audio limpio (sin distorsión).
+ Puede observarse que la distorsión analógica introdujo ruido de fondo en
+ la banda de 0 a 
+\begin_inset Formula $8\KILO{Hz}$
+\end_inset
+
+ aproximadamente.
+ Este ruido se observa levemente disminuido en el caso del perceptrón pero,
+ como se dijo anteriormente, se incorporó un ruido de mayor intensidad en
+ otra banda de frecuencias donde antes no había haciendo que en forma global
+ el perceptrón genere más ruido que la distorsión original.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename 2016:02:02:18:41:58_dominio_de_la_frecuencia.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gráfico en el dominio de la frecuencia del audio (completo) que se muestra
+ en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "FIG. resultados [32 16 8 8 1] audio jamas escuchado"
+
+\end_inset
+
+.
+ Se observa que el audio generado por la red neuronal posee un mayor nivel
+ de ruido de fondo principalmente en la banda de 5000 a 15000 Hz.
+ Para obtener estos gráficos se aplicó un promediado sobre las FFT calculadas
+ con el fin de quitar ruido gráfico y apreciar el fenómeno que se menciona.
+ Es por esto que no se aprecian los picos de frecuencias correspondientes
+ a las notas musicales ejecutadas en el audio.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "FIG. FFT [32 16 8 8 1]"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En el caso de la red de estructura [32,16,8,4,2,1] se observó que la misma
+ generó audios con un ruido de fondo de menor intensidad, pero así y todo
+ mayor que la distorsión original.
+\end_layout
+
+\begin_layout Section
+Conclusión
+\end_layout
+
+\begin_layout Standard
+Se logró desarrollar exitosamente un perceptrón de estructura completamente
+ arbitraria en lo que respecta a cantidad de capas y cantidad de neuronas
+ por capa, y se obtuvieron ciertas estructuras capaces de aprender de forma
+ bastante precisa la forma de generar una distorsión particular sobre un
+ audio de guitarra eléctrica limpio, i.e.
+ sin distorsión.
+\end_layout
+
+\begin_layout Standard
+En todos los casos ensayados se observó que los perceptrones generan un
+ mayor nivel de ruido de fondo y que el mismo se concentra en distintas
+ bandas en función de la estructura de la red y del estado de entrenamiento
+ de la misma.
+\end_layout
+
+\begin_layout Standard
+La tecnología actual hace que el distorsionado de audio mediante redes neuronale
+s, de la forma en que se lo implementó en este trabajo, sea lo muy lenta
+ como para que no pueda ser implementada para procesado en tiempo real.
+ Con el avance de la tecnología quizás algún día se puedan implementar redes
+ neuronales a nivel de 
+\emph on
+hardware
+\emph default
+ y entonces sí se las podría utilizar para procesar audio en tiempo real
+ aprovechando las estructuras aquí desarrolladas.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "1"
+key "J. Hertz"
+
+\end_inset
+
+ 
+\emph on
+Introduction to the theory of neural computation
+\emph default
+, J.
+ Hertz & A.
+ Krogh & R.
+ G.
+ Palmer.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "2"
+key "Sanchez Tube Screamer"
+
+\end_inset
+
+ 
+\emph on
+Emulating electric guitar effects with neural networks
+\emph default
+, David Sanchez Mendoza, Universitat Pompeu Fabra, 2005.
+\end_layout
+
+\end_body
+\end_document
